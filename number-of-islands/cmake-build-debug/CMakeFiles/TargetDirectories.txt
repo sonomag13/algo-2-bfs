@@ -1,0 +1,3 @@
+/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/cmake-build-debug/CMakeFiles/number_of_islands.dir
+/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/cmake-build-debug/CMakeFiles/edit_cache.dir

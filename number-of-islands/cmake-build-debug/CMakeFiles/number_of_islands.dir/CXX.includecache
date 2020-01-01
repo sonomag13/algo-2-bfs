@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/Solution.h
+vector
+-
+String2Vector.h
+/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/String2Vector.h
+
+/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/String2Vector.h
+iostream
+-
+vector
+-
+time.h
+-
+string
+-
+boost/algorithm/string.hpp
+-
+
+/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/main.cpp
+iostream
+-
+vector
+-
+Solution.h
+/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/Solution.h
+String2Vector.h
+/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/String2Vector.h
+
