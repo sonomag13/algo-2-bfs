@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/topologic_sorting.dir/main.cpp.o  -o topologic_sorting 
