@@ -1,4 +1,4 @@
-# Install script for directory: /home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands
+# Install script for directory: /home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

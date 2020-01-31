@@ -48,10 +48,10 @@ RM = /home/lu.gao/clion-2019.2.1/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands
+CMAKE_SOURCE_DIR = /home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/cmake-build-debug
+CMAKE_BINARY_DIR = /home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/cmake-build-debug/CMakeFiles /home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/cmake-build-debug/CMakeFiles /home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named number_of_islands
+# Target rules for targets named course_election
 
 # Build rule for target.
-number_of_islands: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 number_of_islands
-.PHONY : number_of_islands
+course_election: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 course_election
+.PHONY : course_election
 
 # fast build rule for target.
-number_of_islands/fast:
-	$(MAKE) -f CMakeFiles/number_of_islands.dir/build.make CMakeFiles/number_of_islands.dir/build
-.PHONY : number_of_islands/fast
+course_election/fast:
+	$(MAKE) -f CMakeFiles/course_election.dir/build.make CMakeFiles/course_election.dir/build
+.PHONY : course_election/fast
 
 main.o: main.cpp.o
 
@@ -129,7 +129,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/number_of_islands.dir/build.make CMakeFiles/number_of_islands.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/course_election.dir/build.make CMakeFiles/course_election.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -138,7 +138,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/number_of_islands.dir/build.make CMakeFiles/number_of_islands.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/course_election.dir/build.make CMakeFiles/course_election.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -147,7 +147,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/number_of_islands.dir/build.make CMakeFiles/number_of_islands.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/course_election.dir/build.make CMakeFiles/course_election.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -157,7 +157,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... number_of_islands"
+	@echo "... course_election"
 	@echo "... edit_cache"
 	@echo "... main.o"
 	@echo "... main.i"

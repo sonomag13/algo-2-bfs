@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/main.cpp" "/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/cmake-build-debug/CMakeFiles/number_of_islands.dir/main.cpp.o"
+  "/home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/main.cpp" "/home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/cmake-build-debug/CMakeFiles/course_election.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

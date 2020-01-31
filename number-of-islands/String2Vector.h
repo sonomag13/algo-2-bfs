@@ -37,7 +37,7 @@ namespace VecOpt {
         // vector<vector<bool>> *Gridptr = new vector<vector<bool>>;
         vector<bool> row;
         vector<vector<bool>>::iterator itrRow;
-        vector<bool>::iterator itrCol;s
+        vector<bool>::iterator itrCol;
         for(itrRow = vectorIn.begin(); itrRow < vectorIn.end(); itrRow++) {
             for(itrCol = itrRow->begin(); itrCol < itrRow->end(); itrCol++) {
                 row.push_back(*itrCol);

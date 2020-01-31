@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/main.cpp
+iostream
+-
+cstdio
+-
+vector
+-
+unordered_set
+-
+queue
+-
+

@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/Solution.h
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/Solution.h
 vector
 -
 String2Vector.h
-/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/String2Vector.h
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/String2Vector.h
 
-/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/String2Vector.h
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/String2Vector.h
 iostream
 -
 vector
@@ -24,13 +24,13 @@ string
 boost/algorithm/string.hpp
 -
 
-/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/main.cpp
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/main.cpp
 iostream
 -
 vector
 -
 Solution.h
-/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/Solution.h
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/Solution.h
 String2Vector.h
-/home/lu.gao/Desktop/No. 9 Algo/HW2/number-of-islands/String2Vector.h
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/String2Vector.h
 

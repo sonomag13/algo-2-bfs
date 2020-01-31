@@ -119,5 +119,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/number_of_islands.dir/DependInfo.cmake"
+  "CMakeFiles/course_election.dir/DependInfo.cmake"
   )
