@@ -1,0 +1,3 @@
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/shortest-knight-path/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/shortest-knight-path/cmake-build-debug/CMakeFiles/shortest_knight_path.dir
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/shortest-knight-path/cmake-build-debug/CMakeFiles/edit_cache.dir

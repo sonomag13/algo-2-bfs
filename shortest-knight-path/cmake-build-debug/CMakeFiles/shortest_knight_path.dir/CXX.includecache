@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/shortest-knight-path/Solution.h
+vector
+-
+queue
+-
+
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/shortest-knight-path/main.cpp
+iostream
+-
+Solution.h
+/home/lu.gao/Desktop/learning-algo-week-2-bfs/shortest-knight-path/Solution.h
+vector
+-
+
