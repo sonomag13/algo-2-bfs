@@ -14,6 +14,9 @@ struct Point {
     Point(int a, int b) : x(a), y(b) {}
 };
 
+int dx[] = {+1, +1, -1, -1, +2, +2, -2, -2};
+int dy[] = {+2, -2, +2, -2, +1, -1, +1, -1};
+
 using namespace std;
 
 class Solution {
@@ -24,8 +27,6 @@ public:
         // write your code here
 
         queue<Point> qPoint;
-        int dx[] = {+1, +1, -1, -1, +2, +2, -2, -2};
-        int dy[] = {+2, -2, +2, -2, +1, -1, +1, -1};
         int numStep = 0, x1, y1, x2, y2;
         Point currentPoint;
 
@@ -65,6 +66,45 @@ public:
         }
 
         return -1;
+
+    }
+
+    vector<vector<int>> getShortestPath(vector<vector<bool>> &grid, Point &source, Point &destination) {
+        // write your code here
+
+        queue<Point> qPoint;
+        int numStep = 0, x1, y1, x2, y2;
+        Point currentPoint;
+
+        int m = grid.size(), n = grid[0].size();
+        vector<vector<int>> action(m, vector<int>(n, 9));
+        vector<vector<bool>> visited(m, vector<bool>(n, false));
+
+        qPoint.push(source);
+
+        while(!qPoint.empty()) {
+            numStep++;
+            int qSize = qPoint.size();
+            for(int i = 0; i < qSize; i++) {
+                currentPoint = qPoint.front();
+                qPoint.pop();
+                x1 = currentPoint.x;
+                y1 = currentPoint.y;
+                for(int j = 0; j < 8; j++) {
+                    x2 = x1 + dx[j];
+                    y2 = y1 + dy[j];
+                    if((0 <= x2 && x2 < m) && (0 <= y2 && y2 < n) && grid[x2][y2] == false && visited[x2][y2] == false) {
+                        if(x2 == destination.x && y2 == destination.y) {
+                            action[x2][y2] = j;
+                            return action;
+                        }
+                        visited[x2][y2] = true;
+                        action[x2][y2] = j;
+                        qPoint.push(Point(x2, y2));
+                    }
+                }
+            }
+        }
 
     }
 };
