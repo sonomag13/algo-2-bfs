@@ -1,3 +1,0 @@
-/home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/cmake-build-debug/CMakeFiles/course_election.dir
-/home/lu.gao/Desktop/learning-algo-week-2-bfs/course-election/cmake-build-debug/CMakeFiles/edit_cache.dir

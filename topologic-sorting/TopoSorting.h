@@ -1,39 +1,94 @@
-//
-// Created by lu.gao on 12/21/19.
-//
 
-#ifndef TOPOLOGIC_SORTING_TOPOSORTING_H
-#define TOPOLOGIC_SORTING_TOPOSORTING_H
+/*
+	127. Topological Sorting
+	中文English
+	Given an directed graph, a topological order of the graph nodes is defined as follow:
 
-using namespace std;
+	For each directed edge A -> B in graph, A must before B in the order list.
+	The first node in the order can be any node in the graph with no nodes direct to it.
+	Find any topological order for the given graph.
 
-namespace TPSorting{
+	Example
+	For graph as follow:
 
-    template <typename  T>
-    void arr2vec(T* arr1, T* arr2, int n, vector<pair<T, T>>* vptr) {
-        for(int i = 0; i < n; i++) {
-            vptr->push_back(make_pair(arr1[i], arr2[i]));
+	图片
+
+	The topological order can be:
+
+	[0, 1, 2, 3, 4, 5]
+	[0, 2, 3, 1, 5, 4]
+	...
+	Challenge
+	Can you do it in both BFS and DFS?
+
+	Clarification
+	Learn more about representation of graphs
+
+	Notice
+	You can assume that there is at least one topological order in the graph.
+ */
+
+/**
+ * Definition for Directed graph.
+ * struct DirectedGraphNode {
+ *     int label;
+ *     vector<DirectedGraphNode *> neighbors;
+ *     DirectedGraphNode(int x) : label(x) {};
+ * };
+ */
+
+class Solution {
+public:
+    /*
+     * @param graph: A list of Directed graph node
+     * @return: Any topological order for the given graph.
+     */
+    vector<DirectedGraphNode*> topSort(vector<DirectedGraphNode*>& graph) {
+        // write your code here
+        
+        vector<DirectedGraphNode*> vecNode; 
+        
+        // calcuate the in degree
+        unordered_map<DirectedGraphNode*, int> mapNodeInDegree; 
+        
+        for (auto ptrNode : graph) {
+            for (auto neighbor : ptrNode->neighbors) {
+                if (mapNodeInDegree.find(neighbor) != mapNodeInDegree.end()) {
+                    mapNodeInDegree[neighbor]++; 
+                }
+                else {
+                    mapNodeInDegree[neighbor] = 1; 
+                }
+            }
         }
-    }
-
-    template <typename T>
-    void print_vec(vector<pair<T, T>>* vptr) {
-        int cnt = 0;
-        pair<T, T> p = vptr->at(0);
-        for(auto itr = vptr->begin(); itr < vptr->end(); itr++) {
-            cout << "\ncounter = " << cnt << endl;
-            cnt++;
-            cout << "\tfirst = " << (*itr).first << " and second = " << (*itr).second << endl;
+        
+        // queue for BSD
+        queue<DirectedGraphNode*> queNode; 
+        for (auto ptrNode : graph) {
+            if (mapNodeInDegree.find(ptrNode) == mapNodeInDegree.end()) {
+                queNode.push(ptrNode); 
+            }
         }
-    }
-
-    template <typename T>
-    void vec2umap(vector<pair<T, T>>* vptr, unordered_map<T, T>* umapptr) {
-        for(auto itr = vptr->begin(); itr < vptr->end(); itr++) {
-            umapptr->insert(*itr);
+        
+        // BFS
+        while (!queNode.empty()) {
+            
+            DirectedGraphNode* currPtrNode = queNode.front();
+            queNode.pop(); 
+            
+            vecNode.push_back(currPtrNode); 
+            
+            // update the in-degree hash map
+            for (auto neighbor : currPtrNode->neighbors) {
+                mapNodeInDegree[neighbor]--; 
+                if (mapNodeInDegree[neighbor] == 0) {
+                    queNode.push(neighbor); 
+                }
+            }
+            
         }
+        
+        return vecNode; 
+        
     }
-
-}
-
-#endif //TOPOLOGIC_SORTING_TOPOSORTING_H
+};

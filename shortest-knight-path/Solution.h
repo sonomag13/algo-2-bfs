@@ -1,114 +1,138 @@
-//
-// Created by lu.gao on 2/4/20.
-//
+/*
+    611. Knight Shortest Path    
+    Given a knight in a chessboard (a binary matrix with 0 as empty and 1 as barrier) with a source position, find the shortest path to a destination position, return the length of the route.
+    Return -1 if destination cannot be reached.
 
-#ifndef SHORTEST_KNIGHT_PATH_SOLUTION_H
-#define SHORTEST_KNIGHT_PATH_SOLUTION_H
-#include <vector>
-#include <queue>
+    Example
+    Example 1:
 
-struct Point {
-    int x;
-    int y;
-    Point() : x(0), y(0) {}
-    Point(int a, int b) : x(a), y(b) {}
-};
+    Input:
+    [[0,0,0],
+     [0,0,0],
+     [0,0,0]]
+    source = [2, 0] destination = [2, 2] 
+    Output: 2
+    Explanation:
+    [2,0]->[0,1]->[2,2]
+    Example 2:
 
-int dx[] = {+1, +1, -1, -1, +2, +2, -2, -2};
-int dy[] = {+2, -2, +2, -2, +1, -1, +1, -1};
+    Input:
+    [[0,1,0],
+     [0,0,1],
+     [0,0,0]]
+    source = [2, 0] destination = [2, 2] 
+    Output:-1
+    Clarification
+    If the knight is at (x, y), he can get to the following positions in one step:
 
-using namespace std;
+    (x + 1, y + 2)
+    (x + 1, y - 2)
+    (x - 1, y + 2)
+    (x - 1, y - 2)
+    (x + 2, y + 1)
+    (x + 2, y - 1)
+    (x - 2, y + 1)
+    (x - 2, y - 1)
+    Notice
+    source and destination must be empty.
+    Knight can not enter the barrier.
+    Path length refers to the number of steps the knight takes.
+ */
+
+/**
+ * Definition for a point.
+ * struct Point {
+ *     int x;
+ *     int y;
+ *     Point() : x(0), y(0) {}
+ *     Point(int a, int b) : x(a), y(b) {}
+ * };
+ */
 
 class Solution {
-
 public:
-
+    /**
+     * @param grid: a chessboard included 0 (false) and 1 (true)
+     * @param source: a point
+     * @param destination: a point
+     * @return: the shortest path 
+     */
     int shortestPath(vector<vector<bool>> &grid, Point &source, Point &destination) {
+        
         // write your code here
-
-        queue<Point> qPoint;
-        int numStep = 0, x1, y1, x2, y2;
-        Point currentPoint;
-
-        if(grid.size() == 0 || grid[0].size() == 0) {
-            return -1;
+        this->rowNum = grid.size(); 
+        this->colNum = grid[0].size(); 
+        int stepNum{0};
+        int dx[] = {+1, +1, -1, -1, +2, +2, -2, -2}; 
+        int dy[] = {+2, -2, +2, -2, +1, -1, +1, -1}; 
+        
+        // the grid is not well defined
+        if (rowNum == 0 || colNum == 0) {
+            return -1; 
         }
-
-        int m = grid.size(), n = grid[0].size();
-        vector<vector<bool>> visited(m, vector<bool>(n, false));
-
-        if(source.x == destination.x && source.y == destination.y) {
-            return numStep;
+        
+        // the sourse just happen to be the target
+        if (source.x == destination.x && source.y == destination.y) {
+            return stepNum; 
         }
-
-        qPoint.push(source);
-
-        while(!qPoint.empty()) {
-            numStep++;
-            int qSize = qPoint.size();
-            for(int i = 0; i < qSize; i++) {
-                currentPoint = qPoint.front();
-                qPoint.pop();
-                x1 = currentPoint.x;
-                y1 = currentPoint.y;
-                for(int j = 0; j < 8; j++) {
-                    x2 = x1 + dx[j];
-                    y2 = y1 + dy[j];
-                    if((0 <= x2 && x2 < m) && (0 <= y2 && y2 < n) && grid[x2][y2] == false && visited[x2][y2] == false) {
-                        if(x2 == destination.x && y2 == destination.y) {
-                            return numStep;
-                        }
-                        visited[x2][y2] = true;
-                        qPoint.push(Point(x2, y2));
+        
+        // matrix to record if a node has been visited
+        vector<vector<bool>> visitedMatrix(rowNum, vector<bool>(colNum, false)); 
+        
+        // establish the BFS
+        queue<Point> quePoints; 
+        quePoints.push(source);
+        
+        bool inGrid, visited; 
+        
+        while (!quePoints.empty()) {
+            
+            // num of the possible source points
+            int n = quePoints.size(); 
+            
+            for (int i = 0; i < n; ++i) {
+                // check out a node
+                Point currPoint{quePoints.front()}; 
+                quePoints.pop();
+                
+                for (int j = 0; j < 8; ++j) {
+                    int x{currPoint.x + dx[j]};
+                    int y{currPoint.y + dy[j]}; 
+                    
+                    // if the point in the boundary
+                    inGrid = isInGrid(x, y); 
+                    
+                    // if the node has been visited
+                    if (inGrid) {
+                        visited = visitedMatrix[x][y];
+                    }
+                    
+                    // the node is in the boundary and not visited
+                    if (inGrid && !visited && !grid[x][y]) {
+                        if (x == destination.x && y == destination.y) {
+                            return stepNum + 1; 
+                        } 
+                        
+                        quePoints.push(Point(x, y));
+                        visitedMatrix[x][y] = true; 
                     }
                 }
+                
             }
+            stepNum++; 
         }
-
+        
+        // run out of the option
         return -1;
-
     }
-
-    vector<vector<int>> getShortestPath(vector<vector<bool>> &grid, Point &source, Point &destination) {
-        // write your code here
-
-        queue<Point> qPoint;
-        int numStep = 0, x1, y1, x2, y2;
-        Point currentPoint;
-
-        int m = grid.size(), n = grid[0].size();
-        vector<vector<int>> action(m, vector<int>(n, 9));
-        vector<vector<bool>> visited(m, vector<bool>(n, false));
-
-        qPoint.push(source);
-
-        while(!qPoint.empty()) {
-            numStep++;
-            int qSize = qPoint.size();
-            for(int i = 0; i < qSize; i++) {
-                currentPoint = qPoint.front();
-                qPoint.pop();
-                x1 = currentPoint.x;
-                y1 = currentPoint.y;
-                for(int j = 0; j < 8; j++) {
-                    x2 = x1 + dx[j];
-                    y2 = y1 + dy[j];
-                    if((0 <= x2 && x2 < m) && (0 <= y2 && y2 < n) && grid[x2][y2] == false && visited[x2][y2] == false) {
-                        if(x2 == destination.x && y2 == destination.y) {
-                            action[x2][y2] = j;
-                            return action;
-                        }
-                        visited[x2][y2] = true;
-                        action[x2][y2] = j;
-                        qPoint.push(Point(x2, y2));
-                    }
-                }
-            }
-        }
-
+    
+private:
+    int rowNum{0}, colNum{0}; 
+    
+    bool isInGrid(int x, int y) {
+        bool condx{0 <= x && x < rowNum}; 
+        bool condy{0 <= y && y < colNum}; 
+        return condx && condy; 
     }
+    
 };
-
-
-
-#endif //SHORTEST_KNIGHT_PATH_SOLUTION_H

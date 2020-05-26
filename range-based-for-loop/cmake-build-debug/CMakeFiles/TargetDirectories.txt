@@ -1,3 +1,0 @@
-/home/lu.gao/Desktop/learning-algo-week-2-bfs/range-based-for-loop/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/lu.gao/Desktop/learning-algo-week-2-bfs/range-based-for-loop/cmake-build-debug/CMakeFiles/range_based_for_loop.dir
-/home/lu.gao/Desktop/learning-algo-week-2-bfs/range-based-for-loop/cmake-build-debug/CMakeFiles/edit_cache.dir

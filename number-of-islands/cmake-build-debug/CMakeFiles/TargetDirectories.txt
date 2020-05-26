@@ -1,3 +1,0 @@
-/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/cmake-build-debug/CMakeFiles/number_of_islands.dir
-/home/lu.gao/Desktop/learning-algo-week-2-bfs/number-of-islands/cmake-build-debug/CMakeFiles/edit_cache.dir

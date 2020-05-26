@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/shortest_knight_path.dir/main.cpp.o  -o shortest_knight_path 
