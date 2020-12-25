@@ -1,104 +1,102 @@
 /*
-    137. Clone Graph    
-    Clone an undirected graph. Each node in the graph contains a label and a list of its neighbors. Nodes are labeled uniquely.
-    You need to return a deep copied graph, which has the same structure as the original graph, and any changes to the new graph will not have any effect on the original graph.
+    133. Clone Graph
+    Given a reference of a node in a connected undirected graph.
 
-    Example
-    Example1
+    Return a deep copy (clone) of the graph.
 
-    Input:
-    {1,2,4#2,1,4#4,1,2}
-    Output: 
-    {1,2,4#2,1,4#4,1,2}
-    Explanation:
-    1------2  
-     \     |  
-      \    |  
-       \   |  
-        \  |  
-          4   
-    Clarification
-    How we serialize an undirected graph: http://www.lintcode.com/help/graph/
+    Each node in the graph contains a val (int) and a list (List[Node]) of its neighbors.
 
-    Notice
-    You need return the node with the same label as the input node.
+    class Node {
+        public int val;
+        public List<Node> neighbors;
+    }
+    
+
+    Test case format:
+    - For simplicity sake, each node's value is the same as the node's index (1-indexed). For example, the first node with val = 1, the second node with val = 2, and so on. The graph is represented in the test case using an adjacency list.
+    - Adjacency list is a collection of unordered lists used to represent a finite graph. Each list describes the set of neighbors of a node in the graph.
+    - The given node will always be the first node with val = 1. You must return the copy of the given node as a reference to the cloned graph.
  */
 
-/**
- * Definition for undirected graph.
- * struct UndirectedGraphNode {
- *     int label;
- *     vector<UndirectedGraphNode *> neighbors;
- *     UndirectedGraphNode(int x) : label(x) {};
- * };
- */
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> neighbors;
+    Node() {
+        val = 0;
+        neighbors = vector<Node*>();
+    }
+    Node(int _val) {
+        val = _val;
+        neighbors = vector<Node*>();
+    }
+    Node(int _val, vector<Node*> _neighbors) {
+        val = _val;
+        neighbors = _neighbors;
+    }
+};
 
 class Solution {
 public:
-    /**
-     * @param node: A undirected graph node
-     * @return: A undirected graph node
-     */
-    UndirectedGraphNode* cloneGraph(UndirectedGraphNode* node) {
-        // write your code here
+    Node* cloneGraph(Node* node) {
         
-        if (node == NULL) {
-            return node; 
+        if (!node) {
+            return nullptr; 
         }
+
+        // the entrance is the equivalent of the input node, and will be returned
+        Node* entrance = new Node (node->val); 
+        
+        // hash map between old nodes and new (or cloned) nodes
+        unordered_map<Node*, Node*> mapOldNewNode;
+        mapOldNewNode.insert(make_pair(node, entrance)); 
         
         /**
-         * hash map
-         * - key: pointer to the given node
-         * - val: pointer to the new node
-         */ 
-        unordered_map<UndirectedGraphNode*, UndirectedGraphNode*> mapOldNewNode; 
-        auto newEntryNode = new UndirectedGraphNode(node->label); 
-        mapOldNewNode[node] = newEntryNode; 
+         * BFS is used and we push the old nodes into the queue
+         * 
+         * But why old node instead of new node? 
+         * Because the old nod has neighbors~!
+         **/ 
+        queue<Node*> queNode; 
+        queNode.push(node);
         
-        // initiaize the queue for BFS
-        queue<UndirectedGraphNode*> queNodePtr; 
-        queNodePtr.push(node); 
-        
-        // BFS
-        while (!queNodePtr.empty()) {
+        while (!queNode.empty()) {
             
-            /**
-             * fetch a node from the queue
-             * Notice that at this point, the old node has the information of the neighbors, 
-             * but the new node has only the label.
-             * Therefore we need to iterate the neighors of the old node:
-             * - if the neighor already is already cloned, then append that cloned copy to the new oldNodePtr
-             * - otherwise, create a clone of the old pointer
-             */ 
-            UndirectedGraphNode* oldNodePtr = queNodePtr.front(); 
-            queNodePtr.pop(); 
-            UndirectedGraphNode* newNodePtr = mapOldNewNode[oldNodePtr];
+            // check out the old node on the top
+            Node* currNode{queNode.front()}; 
+            queNode.pop();             
             
-            // clone the neighors
-            for (auto neighbor : oldNodePtr->neighbors) {
-                if (mapOldNewNode.find(neighbor) != mapOldNewNode.end()) {
-                    // the neighbor is aleardy cloned, just append it
-                    newNodePtr->neighbors.push_back(mapOldNewNode[neighbor]);
+            // traverse the neighbors of a old node
+            for (auto neighbor : currNode->neighbors) {                
+                if (mapOldNewNode.find(neighbor) == mapOldNewNode.end()) {
+                    /**
+                     * the neighbor (an old node) has not been cloned yet
+                     * 1. clone the node
+                     * 2. update the hash map
+                     * 3. push the neighor into the queue since we still 
+                     *    need to append the neigbhor to the new node
+                     *    i.e. in this step, a new node is only created and
+                     *    its neighor vector is still empty
+                     * 4. append the new node to the node corresponded with
+                     *    the current node
+                     **/ 
+                    auto newNode = new Node(neighbor->val); 
+                    mapOldNewNode.insert(make_pair(neighbor, newNode));
+                    queNode.push(neighbor);                    
+                    mapOldNewNode[currNode]->neighbors.push_back(newNode);
                 }
                 else {
                     /**
-                     * the neighbor has not been cloned yet
-                     * - create the new node
-                     * - update the map
-                     * - link the node to the current node as a neighbor
-                     * - push the old node into the queue
-                     */
-                    auto newNeighbor = new UndirectedGraphNode(neighbor->label);
-                    mapOldNewNode[neighbor] = newNeighbor; 
-                    newNodePtr->neighbors.push_back(newNeighbor); 
-                    queNodePtr.push(neighbor); 
+                     * the neighbor has already been copied, then simply append
+                     * it to the node pointed corresponded by the current node
+                     **/ 
+                    mapOldNewNode[currNode]->neighbors.push_back(mapOldNewNode[neighbor]);                    
                 }
-            }
-            
-        }
+            }            
+        }        
         
-        return newEntryNode; 
+        return entrance; 
         
     }
-    
 };
