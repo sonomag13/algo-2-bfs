@@ -28,55 +28,61 @@
     1
  */
 
+#include <vector>
+
+using namespace std; 
+
 class Solution {
 public:
-    /**
-     * @param grid: a boolean 2D matrix
-     * @return: an integer
-     */
-    
-    int numIslands(vector<vector<bool>> &grid) {
+    int numIslands(vector<vector<char>>& grid) {
         
-        if (grid.size() == 0 || grid[0].size() == 0) {
+        _numRow = grid.size();
+        if (!_numRow) {
+            return 0; 
+        }
+        _numCol = grid[0].size();
+        if (!_numCol) {
             return 0; 
         }
         
-        // write your code here
-        int counterIsland{0}; 
-        this->rowNum = grid.size();
-        this->colNum = grid[0].size(); 
+        int counter; 
         
-        // loop through the grid
-        for (int i = 0; i < rowNum; i++) {
-            for (int j = 0; j < colNum; j++) {
-                if (grid[i][j]) {
-                    counterIsland++; 
-                    updateVisitedMatrix(i, j, grid);
-                }
+        for (int i = 0; i < _numRow; ++i) {
+            for (int j = 0; j < _numCol; ++j) {
+                if (grid[i][j] == '1') {                    
+                    counter++;
+                    _resetGrid(grid, i, j);
+                }                        
             }
         }
-        return counterIsland; 
+        
+        return counter; 
+        
     }
     
-private:
-
-    int rowNum{0}, colNum{0}; 
-
-    void updateVisitedMatrix(int i, int j, vector<vector<bool>>& grid) {
-        // check if out of the boundary
-        // cout << "err: i = " << i << " and j = " << j << endl; 
-        if (i < 0 || i >= rowNum || j < 0 || j >= colNum) {
+private: 
+    int _numRow{0}; 
+    int _numCol{0};
+    
+    void _resetGrid(vector<vector<char>>& grid, int i, int j) {
+        
+        if (!_inGrid(i, j) || grid[i][j] == '0') {
             return; 
         }
-        if (!grid[i][j]) {
-            return; 
-        }
-        grid[i][j] = false; 
-        updateVisitedMatrix(i+1, j, grid);
-        updateVisitedMatrix(i, j+1, grid);
-        updateVisitedMatrix(i-1, j, grid);
-        updateVisitedMatrix(i, j-1, grid);
+        
+        // [i, j] in the grid and its value is 1
+        grid[i][j] = '0'; 
+        
+        // explore the neighbors
+        _resetGrid(grid, i + 1, j);
+        _resetGrid(grid, i - 1, j);
+        _resetGrid(grid, i, j + 1);
+        _resetGrid(grid, i, j - 1);
+
     }
     
-    
+    bool _inGrid(int i, int j) {
+        return 0 <= i && i < _numRow && 0 <= j && j < _numCol; 
+    }
+    s
 };
