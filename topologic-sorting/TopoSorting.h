@@ -28,14 +28,19 @@
 	You can assume that there is at least one topological order in the graph.
  */
 
-/**
- * Definition for Directed graph.
- * struct DirectedGraphNode {
- *     int label;
- *     vector<DirectedGraphNode *> neighbors;
- *     DirectedGraphNode(int x) : label(x) {};
- * };
- */
+#include <queue>
+#include <unordered_map>
+#include <vector>
+
+using namespace std; 
+
+// Definition for Directed graph.
+struct DirectedGraphNode {
+    int label;
+    vector<DirectedGraphNode *> neighbors;
+    DirectedGraphNode(int x) : label(x) {};
+ };
+
 
 class Solution {
 public:
