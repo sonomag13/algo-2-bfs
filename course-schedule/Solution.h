@@ -1,22 +1,4 @@
-/**
-    615. Course Schedule
-
-    There are a total of n courses you have to take, labeled from 0 to n - 1.
-
-    Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
-
-    Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
-
-    Example
-    Example 1:
-
-    Input: n = 2, prerequisites = [[1,0]] 
-    Output: true
-    Example 2:
-
-    Input: n = 2, prerequisites = [[1,0],[0,1]] 
-    Output: false
- */
+// LeetCode 207 Course Schedule
 
 #include <queue>
 #include <unordered_set>
@@ -28,50 +10,44 @@ class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         
-        int numTaken{0};
-        
-        // in-degree
-        vector<int> inDegree(numCourses, 0);
-        
-        // courses blocked by course [i]
-        vector<vector<int>> blockedCourse(numCourses); 
-        
-        // calculate in-degree and course that is blocked
-        for (auto & course : prerequisites) {
-            int courseToTake{course[0]};             
-            int coursePrereq{course[1]};
-            // update the in degree to take the course
-            inDegree[courseToTake]++;                   
-            // update the course that is blocked by the prerequisite
-            blockedCourse[coursePrereq].push_back(courseToTake);                        
+        // degree of course i need to be zero. the tricky part is, a course 
+        // may have many prerequisites, and all the prerequisites need to 
+        // be take before taking course i.
+        vector<int> inDegree(numCourses, 0); 
+
+        vector<vector<int>> graphPrereq(numCourses, vector<int>()); 
+
+        for (auto & courses : prerequisites) {
+            int courseToTake = courses[0];
+            int courseToBlock = courses[1]; 
+            ++inDegree[courseToTake];  // a courseToBlock has blocked courseToTake
+            graphPrereq[courseToBlock].push_back(courseToTake);
         }
-        
-        queue<int> queCourseCanTake;        
-        for (int i = 0; i < inDegree.size(); ++i) {            
-            if (!inDegree[i]) {
-                queCourseCanTake.push(i);
-            }            
+
+        queue<int> qPrereq;  // course in this queue has no prerequisite
+        for (int i = 0; i < numCourses; ++i) {
+            if (inDegree[i] == 0) {
+                qPrereq.push(i);  // no prerequisite means 0 in-degree
+            }
         }
-        
-        while (!queCourseCanTake.empty()) {            
-            int numCanTake = queCourseCanTake.size();            
-            for (int i = 0; i < numCanTake; ++i) {                
-                int currCourse = queCourseCanTake.front();
-                queCourseCanTake.pop();                
-                // a course is taken
-                numTaken++; 
-                // update the course that is blocked
-                vector<int> currBlockedCourse = blockedCourse[currCourse];                
-                for (auto course : currBlockedCourse) {
-                    inDegree[course]--;
-                    if (!inDegree[course]) {
-                        queCourseCanTake.push(course);
-                    }
-                }                                
-            }                        
-        }                
-        
-        return numTaken == numCourses; 
-        
+
+        int numTaken = 0; 
+
+        while (!qPrereq.empty()) {
+            int curCourse = qPrereq.front();
+            qPrereq.pop();
+            ++numTaken;
+            for (auto nextCourse : graphPrereq[curCourse]) {
+                // since the current course is taken, the in degree of the next course 
+                // (which is previous blocked by the current course decrease by 1 
+                --inDegree[nextCourse]; 
+                if (inDegree[nextCourse] == 0) {
+                    // all the prerequisite of the next course have been taken
+                    qPrereq.push(nextCourse); 
+                }
+            }
+        }
+
+        return numTaken == numCourses ? true : false; 
     }
 };
